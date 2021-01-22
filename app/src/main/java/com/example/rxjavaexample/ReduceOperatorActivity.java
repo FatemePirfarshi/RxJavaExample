@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.functions.BiFunction;
 
 public class ReduceOperatorActivity extends AppCompatActivity {
 
-    private static final String TAG = ReduceOperatorActivity.class.getSimpleName();
+    private static final String TAG = "ReduceOperatorActivity";
 
     private Disposable disposable;
 

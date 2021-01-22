@@ -6,17 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
-
-    /**
-     * Basic Observable, Observer, Subscriber example
-     * Observable emits list of animal names
-     */
 
     private static final String TAG = "RxJavaExample";
 
@@ -24,43 +21,41 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Observable<String> animalsObservable = getAnimalsObservable();
 
-        // observer
-        Observer<String> animalsObserver = getAnimalsObserver();
+        Observable<String> animalObservale = getAnimalsObservable();
+        Observer<String> animalObserver = getAnimalsObserver();
 
-        // observer subscribing to observable
-        animalsObservable
-                .observeOn(Schedulers.io())
+        animalObservale.observeOn(Schedulers.io())
                 .subscribeOn(AndroidSchedulers.mainThread())
-                .subscribe(animalsObserver);
+                .subscribe(animalObserver);
     }
 
-    private Observer<String> getAnimalsObserver() {
+    private Observable<String> getAnimalsObservable(){
+        return Observable.just("Eagle", "Bea", "Lion", "Dog", "Wolf");
+    }
+
+    private Observer<String> getAnimalsObserver(){
         return new Observer<String>() {
             @Override
-            public void onSubscribe(Disposable d) {
-                Log.d(TAG, "onSubscribe");
+            public void onSubscribe(@NonNull Disposable d) {
+                Log.e(TAG, "onSubscribe method call");
             }
 
             @Override
-            public void onNext(String s) {
-                Log.d(TAG, "Name: " + s);
+            public void onNext(@NonNull String s) {
+                Log.e(TAG, "onNext method call" + s);
             }
 
             @Override
-            public void onError(Throwable e) {
-                Log.e(TAG, "onError: " + e.getMessage());
+            public void onError(@NonNull Throwable e) {
+                Log.e(TAG, "onError method call");
             }
 
             @Override
             public void onComplete() {
-                Log.d(TAG, "All items are emitted!");
+                Log.e(TAG, "onComplete method call");
             }
         };
     }
 
-    private Observable<String> getAnimalsObservable() {
-        return Observable.just("Eagle", "Bee", "Lion", "Dog", "Wolf");
-    }
 }

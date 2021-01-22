@@ -9,10 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RxJavaExample">
-        <activity android:name=".TakeOperatorActivity"></activity>
-        <activity android:name=".ReduceOperatorActivity" />
+        <activity android:name=".TakeOperatorActivity">
+
+        </activity>
+        <activity android:name=".ReduceOperatorActivity" >
+
+        </activity>
         <activity android:name=".FlatMapActivity" />
-        <activity android:name=".FilterOperatorActivity" />
+        <activity android:name=".FilterOperatorActivity" >
+
+        </activity>
         <activity android:name=".MapOperatorActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
